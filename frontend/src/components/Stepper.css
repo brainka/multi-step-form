@@ -1,0 +1,45 @@
+.stepper-container {
+	background-image: url('../assets//images/bg-sidebar-desktop.svg');
+	background-size: cover;
+	width: 27.4rem;
+	height: 56.8rem;
+
+	border-radius: 1rem;
+
+	padding: 4rem 3.2rem 0;
+
+	display: flex;
+	flex-direction: column;
+	gap: 3.2rem;
+}
+
+.stepper {
+	display: flex;
+	gap: 1.6rem;
+}
+
+.stepper-right {
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+}
+
+.stepper-number {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 3.3rem;
+	aspect-ratio: 1/1;
+
+	border: 0.1rem solid white;
+	border-radius: 50%;
+
+	cursor: pointer;
+}
+
+.active {
+	background-color: #bee2fd;
+	color: #022959;
+	border: 1px solid #bee2fd;
+}
