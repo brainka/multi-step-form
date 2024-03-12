@@ -34,6 +34,14 @@ body {
 	font-weight: bold;
 }
 
+.df {
+	display: flex;
+}
+
+.jb {
+	justify-content: space-between;
+}
+
 button {
 	cursor: pointer;
 	background-color: #022959;
@@ -45,4 +53,59 @@ button {
 	font-weight: bold;
 	height: 4.8rem;
 	font-size: 1.6rem;
+}
+
+button:hover {
+	background-color: #164a8a;
+}
+
+h1 {
+	margin: 0;
+	margin-bottom: 1.1rem;
+	font-size: 3rem;
+}
+
+p {
+	margin: 0;
+	margin-bottom: 4rem;
+	color: #9699aa;
+}
+
+.text-denim {
+	color: #022959;
+}
+
+.info-container {
+	width: 45rem;
+	/* height: 37.2rem; */
+	padding-top: 5.6rem;
+}
+
+h3 {
+	margin: 0;
+}
+
+.page-layout {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-end;
+	height: 55.8rem;
+}
+
+.page-buttons {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.go-back-button {
+	background-color: transparent;
+	color: #9699aa;
+	width: unset;
+	height: unset;
+}
+
+.go-back-button:hover {
+	background-color: unset;
 }

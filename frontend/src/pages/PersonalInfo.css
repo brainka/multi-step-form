@@ -4,29 +4,18 @@
 	padding-top: 5.6rem;
 }
 
-.personal-info {
+/* .personal-info {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: flex-end;
 	height: 55.8rem;
-}
+} */
 
 form {
 	display: flex;
 	flex-direction: column;
 	gap: 2.4rem;
-}
-
-h1 {
-	margin: 0;
-	margin-bottom: 1.1rem;
-	font-size: 3rem;
-}
-
-p {
-	margin: 0;
-	margin-bottom: 4rem;
 }
 
 input {
@@ -35,12 +24,17 @@ input {
 	border: 0.1rem solid #d6d9e6;
 	border-radius: 0.8rem;
 	padding: 1.2rem 1.6rem;
+	cursor: pointer;
 }
 
-input::placeholder,
-p {
+input::placeholder {
 	color: #9699aa;
 	font-weight: bold;
+}
+
+input:focus {
+	outline: none;
+	border: 0.1rem solid #483eff;
 }
 
 label {
@@ -49,6 +43,12 @@ label {
 	gap: 0.8rem;
 }
 
-.text-denim {
-	color: #022959;
+.form-error {
+	color: #ee374a;
+	font-weight: bold;
+	font-size: 1.4rem;
+}
+
+.form-border-error {
+	border: 0.1rem solid #ee374a;
 }

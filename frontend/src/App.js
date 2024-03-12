@@ -21,7 +21,7 @@ function App() {
 						}
 					/>
 					<Route
-						path="/selectplan/step/2"
+						path="/selectplan/step/:stepNumber"
 						element={
 							<Layout>
 								<SelectPlanPage />
@@ -29,7 +29,7 @@ function App() {
 						}
 					/>
 					<Route
-						path="/add-ons/step/3"
+						path="/add-ons/step/:stepNumber"
 						element={
 							<Layout>
 								<AddOnsPage />
@@ -37,7 +37,7 @@ function App() {
 						}
 					/>
 					<Route
-						path="/summary/step/4"
+						path="/summary/step/:stepNumber"
 						element={
 							<Layout>
 								<SummaryPage />

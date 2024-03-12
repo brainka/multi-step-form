@@ -43,3 +43,7 @@
 	color: #022959;
 	border: 1px solid #bee2fd;
 }
+
+.stepper-disabled {
+	pointer-events: none;
+}
