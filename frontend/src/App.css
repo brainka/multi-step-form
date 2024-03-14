@@ -65,6 +65,11 @@ h1 {
 	font-size: 3rem;
 }
 
+h2,
+h3 {
+	margin: 0;
+}
+
 p {
 	margin: 0;
 	margin-bottom: 4rem;
@@ -79,10 +84,6 @@ p {
 	width: 45rem;
 	/* height: 37.2rem; */
 	padding-top: 5.6rem;
-}
-
-h3 {
-	margin: 0;
 }
 
 .page-layout {

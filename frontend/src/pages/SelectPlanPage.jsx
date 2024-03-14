@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '../pages/SelectPlan.css';
 import ArcadeLogo from '../assets/images/icon-arcade.svg';
@@ -6,14 +6,45 @@ import AdvancedLogo from '../assets/images/icon-advanced.svg';
 import ProLogo from '../assets/images/icon-pro.svg';
 import { useNavigate } from 'react-router-dom';
 import { setActiveStep } from '../redux/stepper/stepperSlice';
+import { setSelectedPlan, setToggle } from '../redux/plan/planSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 function SelectPlanPage() {
 	const { stepNumber } = useParams();
-	const [toggle, setToggle] = useState(false);
+	// const [toggle, setToggle] = useState(false);
 	const [yearlyPromotion, setYearlyPromotion] = useState('2 months free');
+	//move to redux
+	// const [selectedPlan, setSelectedPlan] = useState(0);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const selectedPlan = useSelector((state) => state.plan.selectedPlan);
+	const toggle = useSelector((state) => state.plan.toggle);
+
+	console.log(`redux selected plan ${selectedPlan}`);
+
+	useEffect(() => {
+		console.log('changed');
+		// localStorage.setItem('selectedPlan', selectedPlan);
+		localStorage.setItem('planData', JSON.stringify({ selectedPlan, toggle }));
+	}, [selectedPlan, toggle]);
+
+	const plans = [
+		{
+			name: 'Arcade',
+			price: 9,
+			logo: ArcadeLogo,
+		},
+		{
+			name: 'Advanced',
+			price: 12,
+			logo: AdvancedLogo,
+		},
+		{
+			name: 'Pro',
+			price: 15,
+			logo: ProLogo,
+		},
+	];
 
 	function handleSubmit() {
 		console.log('submit');
@@ -30,6 +61,11 @@ function SelectPlanPage() {
 		navigate(`/yourinfo/step/${parseInt(stepNumber) - 1}`);
 	}
 
+	function handlePlanSelect(plan) {
+		console.log(`selected plan ${plan}`);
+		dispatch(setSelectedPlan(plan));
+	}
+
 	return (
 		<div className="page-layout">
 			<div className="info-container">
@@ -38,8 +74,32 @@ function SelectPlanPage() {
 					You have the option of monthly or yearly billing.
 				</p>
 				<div className="select-plan-container">
+					{plans.map((plan, index) => {
+						const { name, price, logo } = plan;
+						return (
+							<div
+								key={index}
+								className={`${
+									index === parseInt(selectedPlan) ? 'active-plan' : ''
+								} ${toggle ? 'plan-container expand' : 'plan-container'}`}
+								onClick={() => handlePlanSelect(index)}
+							>
+								<img src={logo} alt="" />
+								<div className="plan-details">
+									<h3>{name}</h3>
+									<p>${price}/mo</p>
+									{toggle && <div>{yearlyPromotion}</div>}
+								</div>
+							</div>
+						);
+					})}
+				</div>
+
+				{/* <div className="select-plan-container">
 					<div
-						className={`${toggle ? 'plan-container expand' : 'plan-container'}`}
+						className={`selected-plan  ${
+							toggle ? 'plan-container expand' : 'plan-container'
+						}`}
 					>
 						<img src={ArcadeLogo} alt="" />
 						<div className="plan-details">
@@ -68,10 +128,10 @@ function SelectPlanPage() {
 							{toggle && <div>{yearlyPromotion}</div>}
 						</div>
 					</div>
-				</div>
+				</div> */}
 				<div
 					className="plan-frequency-options"
-					onClick={() => setToggle(!toggle)}
+					onClick={() => dispatch(setToggle(!toggle))}
 				>
 					<div
 						className={`${

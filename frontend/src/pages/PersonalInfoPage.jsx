@@ -29,6 +29,12 @@ const PersonalInfoPage = () => {
 			setIsNameError(false);
 			setIsEmailError(false);
 			setIsPhoneError(false);
+
+			//look into variable names here, might be what was causing the undefined issue
+			localStorage.setItem(
+				'yourInfo',
+				JSON.stringify({ name, emailAddress, phoneNumber })
+			);
 			dispatch(setActiveStep(parseInt(stepNumber) + 1));
 			navigate(`/selectplan/step/${parseInt(stepNumber) + 1}`);
 		} else if (!name.trim() && !emailAddress.trim() && !phoneNumber.trim()) {
@@ -52,9 +58,24 @@ const PersonalInfoPage = () => {
 		}
 	}
 
+	// TO DO
+	useEffect(() => {
+		const { name, emailAddress, phoneNumber } =
+			JSON.parse(localStorage.getItem('yourInfo')) || {};
+		setName(name || '');
+		setEmailAddress(emailAddress || '');
+		setPhoneNumber(phoneNumber || '');
+	}, []);
+
 	function handleNameChange(e) {
 		console.log(e.target.value);
 		setName(e.target.value);
+
+		const existingData = JSON.parse(localStorage.getItem('yourInfo')) || {};
+
+		existingData.name = e.target.value;
+
+		localStorage.setItem('yourInfo', JSON.stringify(existingData));
 
 		if (e.target.value.length > 0) {
 			setIsNameError(false);
@@ -67,6 +88,12 @@ const PersonalInfoPage = () => {
 		console.log(e.target.value);
 		setEmailAddress(e.target.value);
 
+		const existingData = JSON.parse(localStorage.getItem('yourInfo')) || {};
+
+		existingData.emailAddress = e.target.value;
+
+		localStorage.setItem('yourInfo', JSON.stringify(existingData));
+
 		if (e.target.value.length > 0) {
 			setIsEmailError(false);
 		} else {
@@ -77,6 +104,12 @@ const PersonalInfoPage = () => {
 	function handleNumberChange(e) {
 		console.log(e.target.value);
 		setPhoneNumber(e.target.value);
+
+		const existingData = JSON.parse(localStorage.getItem('yourInfo')) || {};
+
+		existingData.phoneNumber = e.target.value;
+
+		localStorage.setItem('yourInfo', JSON.stringify(existingData));
 
 		if (e.target.value.length > 0) {
 			setIsPhoneError(false);

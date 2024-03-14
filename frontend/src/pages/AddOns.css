@@ -1,0 +1,66 @@
+.addons-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1.6rem;
+}
+
+.product {
+	border: 1px solid #d6d9e6;
+	border-radius: 0.8rem;
+
+	display: flex;
+	justify-content: space-between;
+	padding-top: 1.8rem;
+	padding-left: 2.9rem;
+	padding: 1.8rem 2.4rem;
+
+	cursor: pointer;
+}
+
+.product-active {
+	background-color: #f8f9ff;
+	border: 0.1rem solid #483eff;
+}
+
+.product-left {
+	display: flex;
+	gap: 2.4rem;
+}
+
+.product-left-inner {
+	display: flex;
+	flex-direction: column;
+	gap: 0.7rem;
+}
+
+.product-checkbox {
+	cursor: pointer;
+	display: flex;
+	align-self: center;
+	width: 2rem;
+	height: 2rem;
+	border: 1px solid #d6d9e6;
+	border-radius: 0.4rem;
+}
+
+.product-checkbox-active {
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-self: center;
+	width: 2rem;
+	height: 2rem;
+	background-color: #483eff;
+	border-radius: 0.4rem;
+}
+
+.product-left-inner > p {
+	margin: 0;
+}
+
+.product-price {
+	display: flex;
+	align-self: center;
+	color: #483eff;
+}

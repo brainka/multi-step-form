@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 const initialState = {
 	activeStep: localStorage.getItem('activeStep') || '1',
 	// TO DO

@@ -47,3 +47,8 @@
 .stepper-disabled {
 	pointer-events: none;
 }
+
+.selected-plan {
+	background-color: #f8f9ff;
+	border: 1px solid #483eff;
+}

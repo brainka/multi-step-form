@@ -87,3 +87,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 }
+
+.active-plan {
+	border: 1px solid #483EFF;
+}
