@@ -39,7 +39,8 @@ function AddOnsPage() {
 	];
 
 	function handleSubmit() {
-		console.log('clicked');
+		dispatch(setActiveStep(parseInt(stepNumber) + 1));
+		navigate(`/summary/step/${parseInt(stepNumber) + 1}`);
 	}
 
 	function handleGoBack() {

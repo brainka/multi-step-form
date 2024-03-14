@@ -6,6 +6,7 @@ import SelectPlanPage from './pages/SelectPlanPage';
 import SummaryPage from './pages/SummaryPage';
 import Layout from './components/Layout';
 import StepperProvider from './Context/StepperContext';
+import ThankYouPage from './pages/ThankYouPage';
 
 function App() {
 	return (
@@ -41,6 +42,14 @@ function App() {
 						element={
 							<Layout>
 								<SummaryPage />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/summary/step/:stepNumber"
+						element={
+							<Layout>
+								<ThankYouPage />
 							</Layout>
 						}
 					/>

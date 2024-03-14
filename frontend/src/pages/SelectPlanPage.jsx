@@ -19,14 +19,18 @@ function SelectPlanPage() {
 	const dispatch = useDispatch();
 	const selectedPlan = useSelector((state) => state.plan.selectedPlan);
 	const toggle = useSelector((state) => state.plan.toggle);
+	const [selectedPlanPrice, setSelectedPlanPrice] = useState('');
 
 	console.log(`redux selected plan ${selectedPlan}`);
 
 	useEffect(() => {
 		console.log('changed');
 		// localStorage.setItem('selectedPlan', selectedPlan);
-		localStorage.setItem('planData', JSON.stringify({ selectedPlan, toggle }));
-	}, [selectedPlan, toggle]);
+		localStorage.setItem(
+			'planData',
+			JSON.stringify({ selectedPlan, toggle, selectedPlanPrice })
+		);
+	}, [selectedPlan, toggle, selectedPlanPrice]);
 
 	const plans = [
 		{
@@ -61,8 +65,9 @@ function SelectPlanPage() {
 		navigate(`/yourinfo/step/${parseInt(stepNumber) - 1}`);
 	}
 
-	function handlePlanSelect(plan) {
-		console.log(`selected plan ${plan}`);
+	function handlePlanSelect(plan, price) {
+		console.log(`selected plan ${plan} and price ${price}`);
+		setSelectedPlanPrice(price);
 		dispatch(setSelectedPlan(plan));
 	}
 
@@ -79,10 +84,10 @@ function SelectPlanPage() {
 						return (
 							<div
 								key={index}
-								className={`${
-									index === parseInt(selectedPlan) ? 'active-plan' : ''
-								} ${toggle ? 'plan-container expand' : 'plan-container'}`}
-								onClick={() => handlePlanSelect(index)}
+								className={`${name === selectedPlan ? 'active-plan' : ''} ${
+									toggle ? 'plan-container expand' : 'plan-container'
+								}`}
+								onClick={() => handlePlanSelect(name, price)}
 							>
 								<img src={logo} alt="" />
 								<div className="plan-details">

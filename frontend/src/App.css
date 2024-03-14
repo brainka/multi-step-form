@@ -22,6 +22,14 @@ body {
 	font-size: 1.4rem;
 }
 
+.fz-16 {
+	font-size: 1.6rem;
+}
+
+.fz-20 {
+	font-size: 2rem;
+}
+
 .light-blue {
 	color: #abbcff;
 }
