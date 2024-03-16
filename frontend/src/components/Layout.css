@@ -5,5 +5,13 @@
 	border-radius: 1.5rem;
 	padding: 1.6rem;
 	gap: 10rem;
-	background-color: white;
+	/* background-color: white; */
+}
+
+@media screen and (max-width: 375px) {
+	.layout-container {
+		width: 37.5rem;
+		flex-direction: column;
+		padding: unset;
+	}
 }

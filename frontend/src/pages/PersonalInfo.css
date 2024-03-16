@@ -52,3 +52,7 @@ label {
 .form-border-error {
 	border: 0.1rem solid #ee374a;
 }
+
+@media screen and (max-width: 375px) {
+	
+}

@@ -49,9 +49,9 @@ function Stepper() {
 						>
 							{number}
 						</div>
-						<div className="stepper-right">
+						<div className="stepper-right steps-hidden">
 							<div className="fz-12 light-blue">{`STEP ${number}`}</div>
-							<div className="fz-14 white bold">{step.toLocaleUpperCase()}</div>
+							<div className="fz-14 white bold stepper-mobile">{step.toLocaleUpperCase()}</div>
 						</div>
 					</div>
 				);

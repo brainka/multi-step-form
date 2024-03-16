@@ -21,20 +21,20 @@ function AddOnsPage() {
 		{
 			name: 'Online service',
 			details: 'Access to multiplayer games',
-			monthlyPrice: '+$1/mo',
-			yearlyPrice: '+$10/yr',
+			monthlyPrice: '1',
+			yearlyPrice: '10',
 		},
 		{
 			name: 'Larger storage',
 			details: 'Extra 1TB of cloud save',
-			monthlyPrice: '+$2/mo',
-			yearlyPrice: '+$20/yr',
+			monthlyPrice: '2',
+			yearlyPrice: '20',
 		},
 		{
 			name: 'Customizable profile',
 			details: 'Custom theme on your profile',
-			monthlyPrice: '+$2/mo',
-			yearlyPrice: '+$20/yr',
+			monthlyPrice: '2',
+			yearlyPrice: '20',
 		},
 	];
 
@@ -48,15 +48,26 @@ function AddOnsPage() {
 		navigate(`/selectplan/step/${parseInt(stepNumber) - 1}`);
 	}
 
-	function handleCheckboxSelect(checkboxName) {
-		setCheckboxSelected(checkboxName);
-		if (!checkboxSelectedList.includes(checkboxName)) {
-			setCheckboxSelectedList([...checkboxSelectedList, checkboxName]);
+	function handleCheckboxSelect(checkboxName, monthlyPrice, yearlyPrice) {
+		console.log(`price is MONTHLY ${monthlyPrice}`);
+		console.log(`price is YEARLY ${yearlyPrice}`);
+		console.log(`checkbox  ${checkboxName}`);
+
+		if (!checkboxSelectedList.some((item) => item.name === checkboxName)) {
+			setCheckboxSelectedList([
+				...checkboxSelectedList,
+				{
+					name: checkboxName,
+					monthlyPrice,
+					yearlyPrice,
+				},
+			]);
 		} else {
-			const filteredSelectedList = checkboxSelectedList.filter(
-				(item) => item !== checkboxName
+			setCheckboxSelectedList(
+				checkboxSelectedList.filter((item) => {
+					return item.name !== checkboxName;
+				})
 			);
-			setCheckboxSelectedList([...filteredSelectedList]);
 		}
 	}
 
@@ -78,24 +89,26 @@ function AddOnsPage() {
 							<div
 								key={name}
 								className={`${
-									checkboxSelectedList.includes(name)
+									checkboxSelectedList.some((item) => item.name === name)
 										? 'product product-active'
 										: 'product '
 								}`}
-								onClick={() => handleCheckboxSelect(name)}
+								onClick={() =>
+									handleCheckboxSelect(name, monthlyPrice, yearlyPrice)
+								}
 							>
 								<div className="product-left">
 									<div
 										key={name}
 										className={`${
-											checkboxSelectedList.includes(name)
+											checkboxSelectedList.some((item) => item.name === name)
 												? 'product-checkbox-active'
 												: 'product-checkbox'
 										}`}
 									>
-										{checkboxSelectedList.includes(name) && (
-											<img src={Tick} alt="" />
-										)}
+										{checkboxSelectedList.some(
+											(item) => item.name === name
+										) && <img src={Tick} alt="" />}
 									</div>
 									<div className="product-left-inner">
 										<h2 className="product-name text-denim">{name}</h2>
@@ -103,7 +116,7 @@ function AddOnsPage() {
 									</div>
 								</div>
 								<div className="product-price fz-14">
-									{!toggle ? monthlyPrice : yearlyPrice}
+									{!toggle ? `+$${monthlyPrice}/mo` : `+$${yearlyPrice}/yr`}
 								</div>
 							</div>
 						);

@@ -6,7 +6,11 @@ import AdvancedLogo from '../assets/images/icon-advanced.svg';
 import ProLogo from '../assets/images/icon-pro.svg';
 import { useNavigate } from 'react-router-dom';
 import { setActiveStep } from '../redux/stepper/stepperSlice';
-import { setSelectedPlan, setToggle } from '../redux/plan/planSlice';
+import {
+	setSelectedPlan,
+	setToggle,
+	setSelectedPlanPrice,
+} from '../redux/plan/planSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 function SelectPlanPage() {
@@ -18,13 +22,46 @@ function SelectPlanPage() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const selectedPlan = useSelector((state) => state.plan.selectedPlan);
+	const selectedPlanPrice = useSelector(
+		(state) => state.plan.selectedPlanPrice
+	);
 	const toggle = useSelector((state) => state.plan.toggle);
-	const [selectedPlanPrice, setSelectedPlanPrice] = useState('');
+	const planLocalStorage = JSON.parse(localStorage.getItem('planData')) || {};
+	// const [selectedPlanPrice, setSelectedPlanPrice] = useState(
+	// 	planLocalStorage.selectedPlanPrice
+	// );
 
-	console.log(`redux selected plan ${selectedPlan}`);
+	const planRef = useRef();
+
+	const plans = [
+		{
+			id: 1,
+			name: 'Arcade',
+			monthlyPrice: 9,
+			yearlyPrice: 90,
+			logo: ArcadeLogo,
+		},
+		{
+			id: 2,
+			name: 'Advanced',
+			monthlyPrice: 12,
+			yearlyPrice: 120,
+			logo: AdvancedLogo,
+		},
+		{
+			id: 3,
+			name: 'Pro',
+			monthlyPrice: 15,
+			yearlyPrice: 150,
+			logo: ProLogo,
+		},
+	];
+
+	console.log(selectedPlanPrice);
 
 	useEffect(() => {
-		console.log('changed');
+		console.log('TOGGLE HAS CHANGED');
+
 		// localStorage.setItem('selectedPlan', selectedPlan);
 		localStorage.setItem(
 			'planData',
@@ -32,32 +69,12 @@ function SelectPlanPage() {
 		);
 	}, [selectedPlan, toggle, selectedPlanPrice]);
 
-	const plans = [
-		{
-			name: 'Arcade',
-			price: 9,
-			logo: ArcadeLogo,
-		},
-		{
-			name: 'Advanced',
-			price: 12,
-			logo: AdvancedLogo,
-		},
-		{
-			name: 'Pro',
-			price: 15,
-			logo: ProLogo,
-		},
-	];
-
 	function handleSubmit() {
-		console.log('submit');
 		dispatch(setActiveStep(parseInt(stepNumber) + 1));
 		navigate(`/add-ons/step/${parseInt(stepNumber) + 1}`);
 	}
 
 	function handleGoBack() {
-		console.log('go back');
 		//need to update the active stepper
 		// navigate(-1);
 
@@ -65,10 +82,30 @@ function SelectPlanPage() {
 		navigate(`/yourinfo/step/${parseInt(stepNumber) - 1}`);
 	}
 
-	function handlePlanSelect(plan, price) {
-		console.log(`selected plan ${plan} and price ${price}`);
-		setSelectedPlanPrice(price);
+	function handlePlanSelect(plan, monthlyPrice, yearlyPrice) {
+		if (!toggle) {
+			dispatch(setSelectedPlanPrice(monthlyPrice));
+		} else {
+			dispatch(setSelectedPlanPrice(yearlyPrice));
+		}
 		dispatch(setSelectedPlan(plan));
+	}
+
+	function handleToggle() {
+		// dispatch(setSelectedPlan(''));
+		dispatch(setToggle(!toggle));
+
+		console.log('toggle function has been selected');
+
+		const currentPlan = plans.find((plan) => plan.name === selectedPlan);
+		//this is working the opposite because we are updating dispatch to the opposite before using the new price, probably to do with react and batching of updates
+		const newPrice = toggle
+			? currentPlan.monthlyPrice
+			: currentPlan.yearlyPrice;
+
+		localStorage.setItem('planData', JSON.stringify({ newPrice }));
+
+		dispatch(setSelectedPlanPrice(newPrice));
 	}
 
 	return (
@@ -79,65 +116,31 @@ function SelectPlanPage() {
 					You have the option of monthly or yearly billing.
 				</p>
 				<div className="select-plan-container">
-					{plans.map((plan, index) => {
-						const { name, price, logo } = plan;
+					{plans.map((plan) => {
+						const { id, name, monthlyPrice, yearlyPrice, logo } = plan;
 						return (
 							<div
-								key={index}
+								ref={planRef}
+								key={id}
+								value={name}
 								className={`${name === selectedPlan ? 'active-plan' : ''} ${
 									toggle ? 'plan-container expand' : 'plan-container'
 								}`}
-								onClick={() => handlePlanSelect(name, price)}
+								onClick={() =>
+									handlePlanSelect(name, monthlyPrice, yearlyPrice)
+								}
 							>
 								<img src={logo} alt="" />
 								<div className="plan-details">
 									<h3>{name}</h3>
-									<p>${price}/mo</p>
+									<p>${!toggle ? monthlyPrice : yearlyPrice}/mo</p>
 									{toggle && <div>{yearlyPromotion}</div>}
 								</div>
 							</div>
 						);
 					})}
 				</div>
-
-				{/* <div className="select-plan-container">
-					<div
-						className={`selected-plan  ${
-							toggle ? 'plan-container expand' : 'plan-container'
-						}`}
-					>
-						<img src={ArcadeLogo} alt="" />
-						<div className="plan-details">
-							<h3>Arcade</h3>
-							<p>$9/mo</p>
-							{toggle && <div>{yearlyPromotion}</div>}
-						</div>
-					</div>
-					<div
-						className={`${toggle ? 'plan-container expand' : 'plan-container'}`}
-					>
-						<img src={AdvancedLogo} alt="" />
-						<div className="plan-details">
-							<h3>Advanced</h3>
-							<p>$12/mo</p>
-							{toggle && <div>{yearlyPromotion}</div>}
-						</div>
-					</div>
-					<div
-						className={`${toggle ? 'plan-container expand' : 'plan-container'}`}
-					>
-						<img src={ProLogo} alt="" />
-						<div className="plan-details">
-							<h3>Pro</h3>
-							<p>$15/mo</p>
-							{toggle && <div>{yearlyPromotion}</div>}
-						</div>
-					</div>
-				</div> */}
-				<div
-					className="plan-frequency-options"
-					onClick={() => dispatch(setToggle(!toggle))}
-				>
+				<div className="plan-frequency-options" onClick={handleToggle}>
 					<div
 						className={`${
 							!toggle ? 'toggle-heading-active' : 'toggle-heading'

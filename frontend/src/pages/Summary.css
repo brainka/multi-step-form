@@ -17,6 +17,18 @@
 	height: 18.2rem;
 }
 
+.small {
+	height: 15.2rem;
+}
+
+.none {
+	height: 8.2rem;
+}
+
+.large {
+	height: 22rem;
+}
+
 .summary-total-container {
 	display: flex;
 	justify-content: space-between;
@@ -37,9 +49,9 @@
 	color: #483eff;
 }
 
-.page-layout {
+/* .page-layout {
 	align-items: unset;
-}
+} */
 
 .summary-plan {
 }
@@ -67,6 +79,7 @@
 .summary-change {
 	color: #9699aa;
 	text-decoration: underline;
+	cursor: pointer;
 }
 
 .line {
