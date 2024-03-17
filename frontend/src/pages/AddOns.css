@@ -64,3 +64,29 @@
 	align-self: center;
 	color: #483eff;
 }
+
+@media screen  and (max-width: 450px) {
+	.product {
+		padding: 1.1rem 1.6rem;
+	}
+
+	.product-left {
+		gap: 1.6rem;
+	}
+
+	.product-left-inner {
+		gap: 0.5rem;
+	}
+
+	.product-left-inner > h2 {
+		font-size: 1.4rem;
+	}
+
+	.product-left-inner > p {
+		font-size: 1.2rem;
+	}
+
+	.product-price {
+		font-size: 1.2rem;
+	}
+}

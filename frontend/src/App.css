@@ -50,6 +50,10 @@ body {
 	justify-content: space-between;
 }
 
+.jfe {
+	justify-content: flex-end;
+}
+
 button {
 	cursor: pointer;
 	background-color: #022959;
@@ -99,9 +103,9 @@ p {
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: flex-end;
-	height: 55.8rem;
+	/* height: 55.8rem; */
+	height: 100%;
 }
-
 .page-buttons {
 	display: flex;
 	justify-content: space-between;
@@ -119,24 +123,37 @@ p {
 	background-color: unset;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 450px) {
 	body {
+		/* height: unset; */
+		/* justify-content: space-between; */
 		display: unset;
+	}
+	h1 {
+		font-size: 2.4rem;
+	}
+
+	.info-container > p {
+		line-height: 2rem;
+		font-size: 1.5rem;
+		padding-right: 2rem;
 	}
 
 	.info-container {
 		position: relative;
-		top: -17.5rem;
+		/* position: absolute; */
+		top: 11.3rem;
 		background-color: white;
 		width: 34.3rem;
 		padding: 3.2rem 2.4rem;
 		border-radius: 1rem;
+		/* height: 37.6rem; */
 	}
 
 	.page-layout {
 		align-items: center;
-		/* height: 100%; */
-		/* position: relative; */
+		height: unset;
+		height: 100vh;
 	}
 
 	.page-layout > button {
@@ -144,11 +161,36 @@ p {
 		justify-content: flex-end;
 	}
 
+	button {
+		border-radius: 0.4rem;
+	}
+
 	.button-mobile-background {
 		width: 100%;
 		background-color: white;
 		padding: 1.6rem;
 		display: flex;
-		justify-content: flex-end;
+	}
+
+	.button-mobile-size {
+		width: 9.7rem;
+		height: 4rem;
+		font-size: 1.4rem;
+	}
+
+	.go-back-button {
+		text-align: left;
+	}
+
+	h3 {
+		font-size: 1.6rem;
+	}
+
+	.plan-details > p {
+		font-size: 1.4rem;
+	}
+
+	.page-buttons {
+		justify-self: flex-end;
 	}
 }

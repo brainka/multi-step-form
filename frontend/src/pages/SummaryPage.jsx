@@ -118,12 +118,15 @@ function SummaryPage() {
 					</div>
 				</div>
 			</div>
-			<div className="page-buttons">
-				<button className="go-back-button" onClick={handleGoBack}>
+			<div className="page-buttons button-mobile-background ">
+				<button
+					className="go-back-button button-mobile-size"
+					onClick={handleGoBack}
+				>
 					Go Back
 				</button>
 				<button
-					className="summary-button"
+					className="summary-button button-mobile-size"
 					type="submit"
 					onClick={handleConfirm}
 				>

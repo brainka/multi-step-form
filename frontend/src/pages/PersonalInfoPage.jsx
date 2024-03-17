@@ -180,8 +180,12 @@ const PersonalInfoPage = () => {
 					</label>
 				</form>
 			</div>
-			<div className="button-mobile-background">
-				<button type="submit" onClick={handleSubmit}>
+			<div className="button-mobile-background jfe">
+				<button
+					type="submit"
+					onClick={handleSubmit}
+					className="button-mobile-size"
+				>
 					Next Step
 				</button>
 			</div>

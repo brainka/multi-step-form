@@ -53,6 +53,26 @@ label {
 	border: 0.1rem solid #ee374a;
 }
 
-@media screen and (max-width: 375px) {
-	
+@media screen and (max-width: 450px) {
+	input {
+		height: 4rem;
+		border-radius: 0.4rem;
+		font-size: 1.5rem;
+	}
+
+	form {
+		gap: 1.6rem;
+	}
+
+	p {
+		margin-bottom: 2.2rem;
+	}
+
+	label > div:first-child {
+		font-size: 1.2rem;
+	}
+
+	label {
+		gap: 0.2rem;
+	}
 }

@@ -133,7 +133,7 @@ function SelectPlanPage() {
 								<img src={logo} alt="" />
 								<div className="plan-details">
 									<h3>{name}</h3>
-									<p>${!toggle ? monthlyPrice : yearlyPrice}/mo</p>
+									<p>${!toggle ? `${monthlyPrice}/mo` : `${yearlyPrice}/yr`}</p>
 									{toggle && <div>{yearlyPromotion}</div>}
 								</div>
 							</div>
@@ -162,11 +162,18 @@ function SelectPlanPage() {
 					</div>
 				</div>
 			</div>
-			<div className="page-buttons">
-				<button className="go-back-button" onClick={handleGoBack}>
+			<div className="page-buttons button-mobile-background jb">
+				<button
+					className="go-back-button button-mobile-size"
+					onClick={handleGoBack}
+				>
 					Go Back
 				</button>
-				<button type="submit" onClick={handleSubmit}>
+				<button
+					type="submit"
+					onClick={handleSubmit}
+					className="button-mobile-size"
+				>
 					Next Step
 				</button>
 			</div>
