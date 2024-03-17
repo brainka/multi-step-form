@@ -75,4 +75,8 @@ label {
 	label {
 		gap: 0.2rem;
 	}
+
+	.form-error {
+		font-size: 1.2rem;
+	}
 }

@@ -1,0 +1,32 @@
+.thank-you {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1.4rem;
+}
+
+.thank-you > p {
+	width: 40rem;
+	font-size: 1.4rem;
+	line-height: 2rem;
+	text-align: center;
+}
+
+.thank-you > img {
+	margin-bottom: 1.8rem;
+}
+
+@media screen and (max-width: 450px) {
+	.thank-you {
+		height: unset;
+	}
+
+	.thank-you > p {
+		width: unset;
+		/* text-align: center; */
+		padding: unset;
+		width: 26.5rem;
+	}
+}

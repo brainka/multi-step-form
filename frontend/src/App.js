@@ -46,7 +46,7 @@ function App() {
 						}
 					/>
 					<Route
-						path="/summary/step/:stepNumber"
+						path="/thankyou"
 						element={
 							<Layout>
 								<ThankYouPage />

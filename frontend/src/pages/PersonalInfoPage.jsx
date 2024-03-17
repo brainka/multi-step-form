@@ -65,6 +65,7 @@ const PersonalInfoPage = () => {
 		setName(name || '');
 		setEmailAddress(emailAddress || '');
 		setPhoneNumber(phoneNumber || '');
+		dispatch(setActiveStep(1));
 	}, []);
 
 	function handleNameChange(e) {

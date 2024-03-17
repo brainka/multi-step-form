@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { setActiveStep } from '../redux/stepper/stepperSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import '../pages/Summary.css';
 
 function SummaryPage() {
@@ -9,19 +9,23 @@ function SummaryPage() {
 	const navigate = useNavigate();
 	const { stepNumber } = useParams();
 	const selectedPlan = useSelector((state) => state.plan.selectedPlan);
+	const location = useLocation();
 	const [planDataStorage, setPlanDataStorage] = useState(
 		JSON.parse(localStorage.getItem('planData')) || {}
 	);
 	const [addonsStorage, setAddonsStorage] = useState(
-		JSON.parse(localStorage.getItem('addons')) || {}
+		JSON.parse(localStorage.getItem('addons')) || []
 	);
 
 	const { selectedPlanPrice, toggle } = planDataStorage;
 
 	const [total, setTotal] = useState(0);
 
+	console.log(location);
+
 	useEffect(() => {
 		setTotal(
+			//TO DO if object is empty
 			addonsStorage.reduce((accumulator, item) => {
 				return (accumulator += !toggle
 					? parseInt(item.monthlyPrice)
@@ -33,8 +37,12 @@ function SummaryPage() {
 	// console.log(test);
 	console.log(`total ${total}`);
 	function handleConfirm() {
-		dispatch(setActiveStep(parseInt(stepNumber) + 1));
-		navigate(`/summary/step/${parseInt(stepNumber) + 1}`);
+		dispatch(setActiveStep(4));
+
+		['yourInfo', 'planData', 'addons']?.forEach((key) =>
+			localStorage.removeItem(key)
+		);
+		navigate(`/thankyou`);
 	}
 
 	function handleGoBack() {
@@ -46,9 +54,6 @@ function SummaryPage() {
 		dispatch(setActiveStep(2));
 		navigate(`/selectplan/step/2`);
 	}
-
-	console.log(planDataStorage.toggle);
-	console.log(addonsStorage.length);
 
 	return (
 		<div className="page-layout">
@@ -102,11 +107,6 @@ function SummaryPage() {
 								</div>
 							);
 						})}
-
-						{/* <div className="summary-addons">
-							<div className="summary-addons-name fz-14">Larger storage</div>
-							<div className="summary-addons-price fz-14">+$2/mo</div>
-						</div> */}
 					</div>
 				</div>
 				<div className="summary-total-container">
