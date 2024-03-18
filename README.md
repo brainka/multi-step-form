@@ -26,4 +26,8 @@ Mobile version
 **How to use it**
 - You can just clone the repository, it works as it is.
 
+**Next Steps**
+- To integrate MongoDB for capturing the form data
+- Create new login page for the user
+- Once the user is logged in, they can view their subscriptions
 
