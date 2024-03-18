@@ -24,6 +24,6 @@ Mobile version
 <img width="454" alt="image" src="https://github.com/brainka/multi-step-form/assets/79426056/821b9e13-3c29-4955-b068-cb386d554482">
 
 **How to use it**
-You can just clone the repository, it works as it is.
+- You can just clone the repository, it works as it is.
 
 
